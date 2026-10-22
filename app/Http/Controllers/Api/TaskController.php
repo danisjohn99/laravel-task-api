@@ -10,7 +10,8 @@ class TaskController extends Controller
 {
     // List all task
     public function index(Request $request)
-    {
+    {   
+        // filter task based on status
         if ($request->status) {
             $tasks = Task::where('status', $request->status)->latest()->get();
         } else {
@@ -26,7 +27,7 @@ class TaskController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:20',
             'description' => 'required|string|max:100',
-            'due_date' => 'required|date|',
+            'due_date' => 'required|date',
             'status' =>'required|string',
         ]);
 
